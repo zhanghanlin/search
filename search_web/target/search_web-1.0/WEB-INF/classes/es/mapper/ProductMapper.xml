@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Product">
+    <sql id="Base_Column_List">
+        id, name, created_at,created_by, changed_at,changed_by, version
+    </sql>
+    <select id="searchAll" resultType="Product">
+        select
+        <include refid="Base_Column_List"/>
+        from s_product
+    </select>
+    <select id="searchById" resultType="Product">
+        select
+        <include refid="Base_Column_List"/>
+        from s_product
+    </select>
+    <select id="searchByIds" resultType="Product">
+        select
+        <include refid="Base_Column_List"/>
+        from s_product where id in
+        <foreach collection="list" open="(" close=")" item="item"
+                 separator="," index="index">
+            #{item}
+        </foreach>
+    </select>
+</mapper>
