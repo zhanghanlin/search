@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/search.iml" filepath="$PROJECT_DIR$/search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/search_cache/search_cache.iml" filepath="$PROJECT_DIR$/search_cache/search_cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/search_service/search_service.iml" filepath="$PROJECT_DIR$/search_service/search_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/search_utils/search_utils.iml" filepath="$PROJECT_DIR$/search_utils/search_utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/search_web/search_web.iml" filepath="$PROJECT_DIR$/search_web/search_web.iml" />
+    </modules>
+  </component>
+</project>
