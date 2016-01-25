@@ -33,13 +33,13 @@ public class Job {
     }
 
     @Autowired
-    ProductData productData;
+    KeywordData keywordData;
 
     /**
      * 刷新全部
      */
     public void flushAll() {
-        flushProduct(null);
+        flushKeyword(null);
     }
 
     /**
@@ -47,9 +47,9 @@ public class Job {
      *
      * @param list
      */
-    public void flushProduct(List<String> list) {
-        init(productData.beanType());
-        productData.run(list);
+    public void flushKeyword(List<String> list) {
+        init(keywordData.beanType());
+        keywordData.run(list);
     }
 
 

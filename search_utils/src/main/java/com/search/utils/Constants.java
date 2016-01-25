@@ -14,6 +14,5 @@ public interface Constants {
     /**
      * 写入URL
      */
-    public final String BASE_URL = "http://139.129.92.193:9200/";
-    //public final String BASE_URL = "http://127.0.0.1:9200/";
+    public final String BASE_URL = "http://127.0.0.1:9200/";
 }
