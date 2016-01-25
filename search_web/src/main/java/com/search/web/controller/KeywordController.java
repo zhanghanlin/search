@@ -25,7 +25,7 @@ public class KeywordController {
     @Resource
     Job job;
 
-    @RequestMapping
+    @RequestMapping("testInit")
     public ResponseContent<Keyword> testInit() {
         try {
             keywordFacade.testInit(100);
@@ -35,7 +35,7 @@ public class KeywordController {
         }
     }
 
-    @RequestMapping
+    @RequestMapping("init")
     public ResponseContent<Keyword> init(List<String> params) {
         try {
             job.flushKeyword(params);
@@ -45,7 +45,7 @@ public class KeywordController {
         }
     }
 
-    @RequestMapping
+    @RequestMapping("get")
     public ResponseContent<Keyword> get(Long id) {
         try {
             Keyword t = keywordFacade.get(id);
@@ -59,7 +59,7 @@ public class KeywordController {
         }
     }
 
-    @RequestMapping
+    @RequestMapping("associate")
     public ResponseContent<List<Keyword>> associate(String key) {
         try {
             List<Keyword> list = keywordFacade.associateWord(key);

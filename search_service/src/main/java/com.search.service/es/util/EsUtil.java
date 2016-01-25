@@ -1,17 +1,16 @@
 package com.search.service.es.util;
 
-
 import com.search.service.es.ElasticsearchNodeFactoryBean;
 import com.search.utils.Constants;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.client.Client;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
 
 @Service
 public class EsUtil {
 
-    @Resource
+    @Autowired
     private ElasticsearchNodeFactoryBean esNode;
 
     public Client getClient() {

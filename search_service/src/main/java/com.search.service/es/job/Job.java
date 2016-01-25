@@ -1,38 +1,23 @@
 package com.search.service.es.job;
 
-import com.search.service.es.ElasticsearchNodeFactoryBean;
+import com.search.service.es.util.EsUtil;
 import com.search.utils.Constants;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
-import org.elasticsearch.client.Client;
 import org.elasticsearch.common.io.Streams;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
 @Service
 public class Job {
 
-    @Autowired
-    ElasticsearchNodeFactoryBean esNode;
+    @Resource
+    EsUtil esUtil;
 
-    private Client esClient;
-
-    public Client getEsClient() {
-        if (esClient == null) {
-            try {
-                esClient = esNode.getObject().client();
-            } catch (Exception e) {
-
-                e.printStackTrace();
-            }
-        }
-        return esClient;
-    }
-
-    @Autowired
+    @Resource
     KeywordData keywordData;
 
     /**
@@ -61,7 +46,7 @@ public class Job {
             String mapping = Streams.copyToStringFromClasspath(Constants.ES_SEARCH_JSON_PATH + type + ".json");
             try {
                 @SuppressWarnings("unused")
-                PutMappingResponse mappingResponse = getEsClient().admin()
+                PutMappingResponse mappingResponse = esUtil.getClient().admin()
                         .indices()
                         .preparePutMapping(Constants.GLOBAL_INDEX_NAME)
                         .setType(type).setSource(mapping).execute().actionGet();
