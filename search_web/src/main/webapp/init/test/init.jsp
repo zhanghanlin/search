@@ -27,27 +27,17 @@ try {
 	String proMapping = Streams
 			.copyToStringFromClasspath(Constants.ES_SEARCH_JSON_PATH
 					+ "product.json");
-	String brandMapping = Streams
-			.copyToStringFromClasspath(Constants.ES_SEARCH_JSON_PATH
-					+ "brand.json");
 	try {
 		PutMappingResponse proMappingResponse = esClient.admin()
 				.indices()
 				.preparePutMapping(Constants.GLOBAL_INDEX_NAME)
 				.setType("product").setSource(proMapping).execute().actionGet();
-		PutMappingResponse brandMappingResponse = esClient.admin()
-				.indices()
-				.preparePutMapping(Constants.GLOBAL_INDEX_NAME)
-				.setType("brand").setSource(brandMapping).execute().actionGet();
 	} catch (ElasticsearchException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 } catch (IOException e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
 WebResource client = Jerseys.createClient(Constants.BASE_URL);
@@ -59,18 +49,6 @@ for(int i = 0; i < proCount;i++){
 	t.setId(Long.valueOf(id));
 	t.setName(name);
 	WebResource wr = client.path("/" + Constants.GLOBAL_INDEX_NAME + "/product/" + id);
-	String pjson = JSON.toJSON(t).toString();
-	wr.put(pjson);
-}
-
-int brandCount = 100;
-for(int i = 0; i < brandCount;i++){
-	Brand t = new Brand();
-	int id = StringUtils.randomInt(1000, 9999);
-	String name ="b" +  StringUtils.randomChinese(4);
-	t.setId(Long.valueOf(id));
-	t.setName(name);
-	WebResource wr = client.path("/" + Constants.GLOBAL_INDEX_NAME + "/brand/" + id);
 	String pjson = JSON.toJSON(t).toString();
 	wr.put(pjson);
 }
