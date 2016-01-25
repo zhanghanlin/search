@@ -21,7 +21,7 @@ function jumpToSearchBrand(){
 	var keyword = $("#value");
 	var keywordvalue = $.trim(keyword.val());
 	var keyword_utf8 = encodeURIComponent(keywordvalue);
-	var url = "keyword/associat?key="+keyword_utf8;
+	var url = "keyword/associate?key="+keyword_utf8;
 	var h = "";
 	$.getJSON(url, function(data) {
 		$.each(data,function(i,o) {
