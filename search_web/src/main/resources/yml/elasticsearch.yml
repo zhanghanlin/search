@@ -468,7 +468,7 @@ index:
         convert_type: t2s
       my_string2int:
         type: string2int
-        redis_server: 10.1.64.199
+        redis_server:139.129.92.193
         redis_port: 6379
         redis_key: index1_type2_name2
       pinyin_first_letter:
@@ -624,7 +624,7 @@ index:
         convert_type: t2s
       string2int:
         type: org.elasticsearch.index.analysis.String2IntAnalyzerProvider
-        redis_server: 10.1.64.199
+        redis_server:139.129.92.193
         redis_port: 6379
         redis_key: index1_type1_name1
       custom_string2int:
@@ -652,7 +652,7 @@ index:
             maxidle: 10
             maxwait: 100
             testonborrow: true
-          ip: 10.1.64.199:6379
+          ip:139.129.92.193:6379
           channel: ansj_term
       query_ansj:
         alias:
@@ -670,7 +670,7 @@ index:
             maxidle: 10
             maxwait: 100
             testonborrow: true
-          ip: 10.1.64.199:6379
+          ip:139.129.92.193:6379
           channel: ansj_term
 
 #index.analysis.analyzer.default.type: mmseg
