@@ -1,4 +1,4 @@
-package com.search.service.job;
+package com.search.service.es.job;
 
 import com.search.service.bean.Keyword;
 import com.search.service.dao.KeywordDao;

@@ -2,11 +2,11 @@ package com.search.service.dao;
 
 import com.search.service.bean.Keyword;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Component
+@Repository
 public class KeywordDao extends SqlSessionDaoSupport {
 
     public Keyword get(Long id) {

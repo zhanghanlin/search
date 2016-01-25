@@ -1,4 +1,4 @@
-package com.search.service.job;
+package com.search.service.es.util;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;

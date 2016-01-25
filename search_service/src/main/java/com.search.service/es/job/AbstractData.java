@@ -1,6 +1,7 @@
-package com.search.service.job;
+package com.search.service.es.job;
 
 import com.alibaba.fastjson.JSON;
+import com.search.service.es.util.Jerseys;
 import com.search.utils.Constants;
 import com.sun.jersey.api.client.WebResource;
 import org.slf4j.Logger;
@@ -76,7 +77,7 @@ public abstract class AbstractData<T> {
      *
      * @param param
      */
-    protected void run(List<String> param) {
+    protected void run(List<String> param) throws Exception{
         LOG.info("[Job Flush] begin fresh run..............");
         // 子对象集合
         List<T> list = getList(param);
@@ -111,10 +112,11 @@ public abstract class AbstractData<T> {
                 LOG.info("[Job Flush] time ： {}", (end - start) / (1000 * 1000) + "milliSecond");
             } else {
                 LOG.info("[Job Flush] not get lock");
+                throw new Exception("Job not get lock");
             }
         } catch (Exception e) {
-            e.printStackTrace();
             LOG.error("[Job Flush] error: {}", e.getMessage(), e);
+            throw e;
         } finally {
             // 释放锁
             lock.unlock();

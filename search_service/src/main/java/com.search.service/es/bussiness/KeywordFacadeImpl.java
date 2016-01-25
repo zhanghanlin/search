@@ -3,13 +3,19 @@ package com.search.service.es.bussiness;
 import com.alibaba.fastjson.JSON;
 import com.search.service.bean.Keyword;
 import com.search.service.es.AbstractFacade;
+import com.search.service.es.util.EsUtil;
 import com.search.service.es.KeywordFacade;
+import com.search.service.es.util.Jerseys;
 import com.search.utils.Constants;
 import com.search.utils.StringUtils;
+import com.sun.jersey.api.client.WebResource;
+import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.common.io.Streams;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
@@ -21,19 +27,27 @@ import org.elasticsearch.search.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service(value = KeywordFacade.BEAN_ID)
 public class KeywordFacadeImpl extends AbstractFacade<Keyword> implements KeywordFacade {
 
     protected final static Logger LOG = LoggerFactory.getLogger(KeywordFacadeImpl.class);
 
+    @Resource
+    EsUtil esUtil;
+
     @Override
     public Keyword get(Long id) {
         Keyword keyword = null;
-        GetResponse gp = getClient().prepareGet(Constants.GLOBAL_INDEX_NAME, BEAN_TYPE, id.toString()).execute().actionGet();
+        GetResponse gp = esUtil.getClient().prepareGet(Constants.GLOBAL_INDEX_NAME, BEAN_TYPE, id.toString())
+                .execute().actionGet();
         if (gp.isExists()) {
             keyword = JSON.parseObject(gp.getSourceAsString(), Keyword.class);
         } else {
@@ -42,11 +56,53 @@ public class KeywordFacadeImpl extends AbstractFacade<Keyword> implements Keywor
         return keyword;
     }
 
+    /**
+     * 初始化数据-随机字符串
+     *
+     * @param count
+     */
+    public void testInit(int count) throws Exception {
+        WebResource client = null;
+        try {
+            String keywordMapping = Streams.copyToStringFromClasspath(Constants.ES_SEARCH_JSON_PATH + "keyword.json");
+            PutMappingResponse response = esUtil.getClient().admin().indices()
+                    .preparePutMapping(Constants.GLOBAL_INDEX_NAME).setType("keyword")
+                    .setSource(keywordMapping).execute().actionGet();
+            client = Jerseys.createClient(Constants.BASE_URL);
+        } catch (ElasticsearchException e) {
+            throw e;
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            if (client == null) {
+                throw new Exception("client is null");
+            }
+        }
+        for (int i = 0; i < count; i++) {
+            try {
+                Keyword t = new Keyword();
+                int id = StringUtils.randomInt(10000, 99990);
+                String word = StringUtils.randomChinese(5);
+                t.setId(Long.valueOf(id));
+                t.setWord(word);
+                WebResource wr = client.path("/" + Constants.GLOBAL_INDEX_NAME + "/keyword/" + id);
+                String json = JSON.toJSON(t).toString();
+                wr.put(json);
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+    }
+
+    public List<Keyword> associateWord(String key) {
+        return search(key, "", SortOrder.ASC, 1, 10).getItems();
+    }
+
     public SearchResult<Keyword> search(String key, String sort, SortOrder order, int pageNo, int pageSize) {
         final SearchResult<Keyword> searchResult = new SearchResult<Keyword>();
         SearchRequestBuilder srb = builder(key, sort, order, pageNo, pageSize);
         SearchResponse searchResponse = srb.execute().actionGet();
-        getClient().close();
+        esUtil.getClient().close();
         final SearchHits hits = searchResponse.getHits();
         List<Keyword> items = new ArrayList<Keyword>();
         for (final SearchHit searchHit : hits.getHits()) {
@@ -91,7 +147,7 @@ public class KeywordFacadeImpl extends AbstractFacade<Keyword> implements Keywor
         MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(key,
                 highlightedFields).operator(MatchQueryBuilder.Operator.AND);
         bool.must(builder);
-        SearchRequestBuilder srb = getBuilder().setTypes(BEAN_TYPE);
+        SearchRequestBuilder srb = esUtil.getBuilder().setTypes(BEAN_TYPE);
         // 设置查询类型
         // 1.SearchType.DFS_QUERY_THEN_FETCH = 精确查询
         // 2.SearchType.SCAN = 扫描查询,无序

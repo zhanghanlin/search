@@ -1,4 +1,4 @@
-package com.search.service.job;
+package com.search.service.es.job;
 
 import com.search.service.es.ElasticsearchNodeFactoryBean;
 import com.search.utils.Constants;
@@ -38,7 +38,7 @@ public class Job {
     /**
      * 刷新全部
      */
-    public void flushAll() {
+    public void flushAll() throws Exception{
         flushKeyword(null);
     }
 
@@ -47,7 +47,7 @@ public class Job {
      *
      * @param list
      */
-    public void flushKeyword(List<String> list) {
+    public void flushKeyword(List<String> list) throws Exception{
         init(keywordData.beanType());
         keywordData.run(list);
     }

@@ -8,32 +8,9 @@
 <title>Index</title>
 </head>
 <body>
-<input type="text" id="value" />
-<input type="button" id="search" value="搜索"/>
-<div id="data"></div>
-<script type="text/javascript" src="js/jquery-1.11.2.js"></script>
-<script>
-$('#search').click(function(){
-	jumpToSearchBrand();
-})
-
-$("#value").bind("input propertychange", function() { 
-	jumpToSearchBrand();
-}); 
-function jumpToSearchBrand(){
-	var keyword = $("#value");
-	var keywordvalue = $.trim(keyword.val());
-	var keyword_utf8 = encodeURIComponent(keywordvalue);
-	var url = "interface/associat.jsp?key="+keyword_utf8;
-	var h = "";
-	$.getJSON(url, function(data) {
-		$.each(data,function(i,o) {
-			h += o.name + "<br/>";
-		});
-
-		$('#data').html(h);
-	})
-}
-</script>
+<a href="/keyword/get">Get</a><br/>
+<a href="/keyword/testInit">testInit</a><br/>
+<a href="/keyword/init">init</a><br/>
+<a href="/associate">associate</a><br/>
 </body>
 </html>
