@@ -364,7 +364,7 @@ monitor.jvm.gc.ConcurrentMarkSweep.info: 5s
 monitor.jvm.gc.ConcurrentMarkSweep.debug: 2s
 
 node.name: "es_node"
-discovery.zen.ping.unicast.hosts: ["127.0.0.1:9300"]
+discovery.zen.ping.unicast.hosts: ["139.129.92.193:9300"]
 
 node.master: true
 node.data: true
@@ -468,7 +468,7 @@ index:
         convert_type: t2s
       my_string2int:
         type: string2int
-        redis_server: 127.0.0.1
+        redis_server: 10.1.64.199
         redis_port: 6379
         redis_key: index1_type2_name2
       pinyin_first_letter:
@@ -624,7 +624,7 @@ index:
         convert_type: t2s
       string2int:
         type: org.elasticsearch.index.analysis.String2IntAnalyzerProvider
-        redis_server: 127.0.0.1
+        redis_server: 10.1.64.199
         redis_port: 6379
         redis_key: index1_type1_name1
       custom_string2int:
@@ -652,7 +652,7 @@ index:
             maxidle: 10
             maxwait: 100
             testonborrow: true
-          ip: 127.0.0.1:6379
+          ip: 10.1.64.199:6379
           channel: ansj_term
       query_ansj:
         alias:
@@ -670,11 +670,11 @@ index:
             maxidle: 10
             maxwait: 100
             testonborrow: true
-          ip: 127.0.0.1:6379
+          ip: 10.1.64.199:6379
           channel: ansj_term
 
 #index.analysis.analyzer.default.type: mmseg
 index.analysis.analyzer.default.type: keyword
 
-# rtf.filter.redis.host: 127.0.0.1
+# rtf.filter.redis.host: 139.129.92.193
 # rtf.filter.redis.port: 6379
