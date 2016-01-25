@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,6 +27,7 @@ public class KeywordController {
     Job job;
 
     @RequestMapping("testInit")
+    @ResponseBody
     public ResponseContent<Keyword> testInit() {
         try {
             keywordFacade.testInit(100);
@@ -36,6 +38,7 @@ public class KeywordController {
     }
 
     @RequestMapping("init")
+    @ResponseBody
     public ResponseContent<Keyword> init(List<String> params) {
         try {
             job.flushKeyword(params);
@@ -46,6 +49,7 @@ public class KeywordController {
     }
 
     @RequestMapping("get")
+    @ResponseBody
     public ResponseContent<Keyword> get(Long id) {
         try {
             Keyword t = keywordFacade.get(id);
@@ -60,6 +64,7 @@ public class KeywordController {
     }
 
     @RequestMapping("associate")
+    @ResponseBody
     public ResponseContent<List<Keyword>> associate(String key) {
         try {
             List<Keyword> list = keywordFacade.associateWord(key);
