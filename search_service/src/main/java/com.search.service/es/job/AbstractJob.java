@@ -15,9 +15,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public abstract class AbstractData<T> {
+public abstract class AbstractJob<T> {
 
-    protected static final Logger LOG = LoggerFactory.getLogger(AbstractData.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AbstractJob.class);
 
     /**
      * Elsticsearch Client
@@ -44,10 +44,9 @@ public abstract class AbstractData<T> {
     protected abstract void businessPut(T t) throws Exception;
 
     /**
-     * 写入数据方法
-     *
-     * @param id BeanId
-     * @param t  Bean
+     * 将数据写入Es
+     * @param id 对象Id
+     * @param t 对象
      * @throws Exception
      */
     protected void put(Long id, T t) throws Exception {
@@ -56,14 +55,6 @@ public abstract class AbstractData<T> {
         String pjson = JSON.toJSON(t).toString();
         wr.put(pjson);
     }
-
-    /**
-     * 获取数据集合
-     *
-     * @param param
-     * @return
-     */
-    protected abstract List<T> getList(List<String> param);
 
     /**
      * Bean Name
@@ -75,12 +66,10 @@ public abstract class AbstractData<T> {
     /**
      * 多线程刷新
      *
-     * @param param
+     * @param list
      */
-    protected void run(List<String> param) throws Exception{
+    protected void run(List<T> list) throws Exception{
         LOG.info("[Job Flush] begin fresh run..............");
-        // 子对象集合
-        List<T> list = getList(param);
         LOG.info("[Job Flush] list size : {}", list.size());
         // 创建计数器
         final CountDownLatch allLatch = new CountDownLatch(list.size());

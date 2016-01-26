@@ -4,7 +4,9 @@ import com.search.service.bean.Keyword;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class KeywordDao extends SqlSessionDaoSupport {
@@ -17,7 +19,10 @@ public class KeywordDao extends SqlSessionDaoSupport {
         return this.getSqlSession().selectList("Keyword.searchAll");
     }
 
-    public List<Keyword> searchByIds(List<String> param) {
-        return this.getSqlSession().selectList("Keyword.searchByIds", param);
+    public List<Keyword> searchBySection(Long begin,Long end) {
+        Map<String,Long> map = new HashMap<String, Long>();
+        map.put("begin",begin);
+        map.put("end",end);
+        return this.getSqlSession().selectList("Keyword.searchBySection", map);
     }
 }

@@ -15,14 +15,12 @@
         select
         <include refid="Base_Column_List"/>
         from s_keyword
+        where id = #{id}
     </select>
-    <select id="searchByIds" resultType="Keyword">
+    <select id="searchBySection" resultType="Keyword">
         select
         <include refid="Base_Column_List"/>
-        from s_keyword where id in
-        <foreach collection="list" open="(" close=")" item="item"
-                 separator="," index="index">
-            #{item}
-        </foreach>
+        from s_keyword
+        where id between #{0} and #{1}
     </select>
 </mapper>

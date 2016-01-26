@@ -40,6 +40,7 @@
     <orderEntry type="library" name="Maven: com.spatial4j:spatial4j:0.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:3.2.13.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:3.2.13.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-test:3.2.13.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-client:1.12" level="project" />
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-core:1.12" level="project" />
     <orderEntry type="library" name="Maven: com.sun.jersey.contribs:jersey-multipart:1.12" level="project" />

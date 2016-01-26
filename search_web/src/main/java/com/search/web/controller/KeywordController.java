@@ -2,12 +2,13 @@ package com.search.web.controller;
 
 import com.search.service.bean.Keyword;
 import com.search.service.es.bussiness.KeywordFacadeImpl;
-import com.search.service.es.job.Job;
+import com.search.service.es.job.KeywordJob;
 import com.search.web.response.ResponseContent;
 import com.search.web.response.ResponseEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,37 +25,59 @@ public class KeywordController {
     KeywordFacadeImpl keywordFacade;
 
     @Resource
-    Job job;
+    KeywordJob keywordData;
 
-    @RequestMapping("testInit")
+    @RequestMapping("refresh/test")
     @ResponseBody
-    public ResponseContent<Keyword> testInit() {
+    public ResponseContent<Keyword> refreshTest() {
         try {
-            keywordFacade.testInit(100);
+            keywordData.refreshTest(100);
             return new ResponseContent<Keyword>(ResponseEnum.OK);
         } catch (Exception e) {
             return new ResponseContent<Keyword>(ResponseEnum.EXCEPTION);
         }
     }
 
-    @RequestMapping("init")
+    @RequestMapping("refresh/all")
     @ResponseBody
-    public ResponseContent<Keyword> init(List<String> params) {
+    public ResponseContent<Keyword> refreshAll() {
         try {
-            job.flushKeyword(params);
+            keywordData.refresh();
             return new ResponseContent<Keyword>(ResponseEnum.OK);
         } catch (Exception e) {
             return new ResponseContent<Keyword>(ResponseEnum.EXCEPTION);
         }
     }
 
-    @RequestMapping("get")
+    @RequestMapping("refresh/{id}")
     @ResponseBody
-    public ResponseContent<Keyword> get(Long id) {
+    public ResponseContent<Keyword> refreshId(@PathVariable Long id) {
+        try {
+            keywordData.refresh(id);
+            return new ResponseContent<Keyword>(ResponseEnum.OK);
+        } catch (Exception e) {
+            return new ResponseContent<Keyword>(ResponseEnum.EXCEPTION);
+        }
+    }
+
+    @RequestMapping("refresh/section/{begin}_{end}")
+    @ResponseBody
+    public ResponseContent<Keyword> refreshSection(@PathVariable Long begin, @PathVariable Long end) {
+        try {
+            keywordData.refresh(begin, end);
+            return new ResponseContent<Keyword>(ResponseEnum.OK);
+        } catch (Exception e) {
+            return new ResponseContent<Keyword>(ResponseEnum.EXCEPTION);
+        }
+    }
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public ResponseContent<Keyword> get(@PathVariable Long id) {
         try {
             Keyword t = keywordFacade.get(id);
             if (t != null) {
-                return new ResponseContent<Keyword>(ResponseEnum.OK);
+                return new ResponseContent<Keyword>(ResponseEnum.OK, t);
             } else {
                 return new ResponseContent<Keyword>(ResponseEnum.NOT_FOUND);
             }
@@ -63,9 +86,9 @@ public class KeywordController {
         }
     }
 
-    @RequestMapping("associate")
+    @RequestMapping("associate/{key}")
     @ResponseBody
-    public ResponseContent<List<Keyword>> associate(String key) {
+    public ResponseContent<List<Keyword>> associate(@PathVariable String key) {
         try {
             List<Keyword> list = keywordFacade.associateWord(key);
             if (list != null && !list.isEmpty()) {

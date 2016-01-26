@@ -1,4 +1,4 @@
-package search.service.test;
+package com.search.service;
 
 import com.alibaba.fastjson.JSON;
 import com.search.service.bean.Keyword;

@@ -57,43 +57,6 @@ public class KeywordFacadeImpl extends AbstractFacade<Keyword> implements Keywor
         return keyword;
     }
 
-    /**
-     * 初始化数据-随机字符串
-     *
-     * @param count
-     */
-    public void testInit(int count) throws Exception {
-        WebResource client = null;
-        try {
-            String keywordMapping = Streams.copyToStringFromClasspath(Constants.ES_SEARCH_JSON_PATH + "keyword.json");
-            PutMappingResponse response = esUtil.getClient().admin().indices()
-                    .preparePutMapping(Constants.GLOBAL_INDEX_NAME).setType("keyword")
-                    .setSource(keywordMapping).execute().actionGet();
-            client = Jerseys.createClient(Constants.BASE_URL);
-        } catch (ElasticsearchException e) {
-            throw e;
-        } catch (IOException e) {
-            throw e;
-        } finally {
-            if (client == null) {
-                throw new Exception("client is null");
-            }
-        }
-        for (int i = 0; i < count; i++) {
-            try {
-                Keyword t = new Keyword();
-                int id = StringUtils.randomInt(10000, 99990);
-                t.setId(Long.valueOf(id));
-                t.setWord(PoemUtils.getPoemSentence(7));
-                WebResource wr = client.path("/" + Constants.GLOBAL_INDEX_NAME + "/keyword/" + id);
-                String json = JSON.toJSON(t).toString();
-                wr.put(json);
-            } catch (Exception e) {
-                throw e;
-            }
-        }
-    }
-
     public List<Keyword> associateWord(String key) {
         return search(key, "", SortOrder.ASC, 1, 10).getItems();
     }
