@@ -24,10 +24,13 @@ function jumpToSearchBrand(){
 	var url = "keyword/associate?key="+keyword_utf8;
 	var h = "";
 	$.getJSON(url, function(data) {
-		$.each(data,function(i,o) {
-			h += o.name + "<br/>";
-		});
-		$('#data').html(h);
+		$('#data').html('');
+		if(data && data.data) {
+			$.each(data.data,function(i,o) {
+				h += o.word + "<br/>";
+			});
+			$('#data').html(h);
+		}
 	})
 }
 

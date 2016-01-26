@@ -6,7 +6,7 @@ public interface KeywordFacade {
 
     String BEAN_TYPE = "keyword";
 
-    String highlightedFields[] = {"name.name_ik", "name.name_pinyin",
-            "name.name_pinyin_first_letter",
-            "name.name_lowercase_keyword_ngram_min_size1"};
+    String highlightedFields[] = {"word.word_ik", "word.word_pinyin",
+            "word.word_pinyin_first_letter",
+            "word.word_lowercase_keyword_ngram_min_size1"};
 }

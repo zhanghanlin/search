@@ -111,13 +111,13 @@ public class KeywordFacadeImpl extends AbstractFacade<Keyword> implements Keywor
             // 获取对应的高亮域
             Map<String, HighlightField> hig = searchHit.highlightFields();
             // 从设定的高亮域中取得指定域
-            HighlightField nameField = getHighlightField(hig);
-            if (nameField != null) {
+            HighlightField keywordField = getHighlightField(hig);
+            if (keywordField != null) {
                 // 取得定义的高亮标签
-                Text[] nameTexts = nameField.fragments();
+                Text[] keywordFieldTexts = keywordField.fragments();
                 String word = "";
                 // 为name串值增加自定义的高亮标签
-                for (Text text : nameTexts) {
+                for (Text text : keywordFieldTexts) {
                     word += text;
                 }
                 // 将追加了高亮标签的串值重新填充到对应的对象
