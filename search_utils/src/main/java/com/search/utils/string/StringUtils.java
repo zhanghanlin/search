@@ -1,4 +1,4 @@
-package com.search.utils;
+package com.search.utils.string;
 
 import java.util.Random;
 

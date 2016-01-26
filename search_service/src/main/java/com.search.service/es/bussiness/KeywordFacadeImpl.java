@@ -7,7 +7,8 @@ import com.search.service.es.KeywordFacade;
 import com.search.service.es.util.EsUtil;
 import com.search.service.es.util.Jerseys;
 import com.search.utils.Constants;
-import com.search.utils.StringUtils;
+import com.search.utils.random.poetry.PoemUtils;
+import com.search.utils.string.StringUtils;
 import com.sun.jersey.api.client.WebResource;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
@@ -82,9 +83,8 @@ public class KeywordFacadeImpl extends AbstractFacade<Keyword> implements Keywor
             try {
                 Keyword t = new Keyword();
                 int id = StringUtils.randomInt(10000, 99990);
-                String word = StringUtils.randomChinese(5);
                 t.setId(Long.valueOf(id));
-                t.setWord(word);
+                t.setWord(PoemUtils.getPoemSentence(7));
                 WebResource wr = client.path("/" + Constants.GLOBAL_INDEX_NAME + "/keyword/" + id);
                 String json = JSON.toJSON(t).toString();
                 wr.put(json);

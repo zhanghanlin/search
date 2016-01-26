@@ -6,7 +6,6 @@
     <file url="file://$PROJECT_DIR$/search_service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/search_service/src/main/java/com.search.service/bean/AbstractEntity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/search_utils" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/search_utils/src/main/java/com/search/utils/filter/XSSRequestWrapper.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/search_web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/search_web/src/main/java/com/search/web/filter/XSSRequestWrapper.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/search_web/src/main/resources/conf/application.properties" charset="GBK" />

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.search.service.bean.Keyword;
 import com.search.service.es.bussiness.SearchResult;
 import com.search.utils.Constants;
-import com.search.utils.StringUtils;
+import com.search.utils.string.StringUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
@@ -53,7 +53,7 @@ public class JersetTest {
      * @param args
      */
     public static void main(String[] args) {
-        List<Keyword> list = search("民", "", SortOrder.ASC, 1, 10).getItems();
+        List<Keyword> list = search("花", "", SortOrder.ASC, 1, 10).getItems();
         System.out.println("total:" + list.size());
         for (Keyword keyword : list) {
             System.out.println("keyword:" + keyword.toJSON());
