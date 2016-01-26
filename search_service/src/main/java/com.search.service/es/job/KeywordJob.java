@@ -38,10 +38,11 @@ public class KeywordJob extends AbstractJob<Keyword> {
     /**
      * 刷新所有商品
      */
-    public void refresh() throws Exception {
+    public Integer refresh() throws Exception {
         esUtil.init(initType);
         List<Keyword> list = keywordDao.searchAll();
         run(list);
+        return list.size();
     }
 
     /**
@@ -49,10 +50,11 @@ public class KeywordJob extends AbstractJob<Keyword> {
      *
      * @param id
      */
-    public void refresh(Long id) throws Exception {
+    public Keyword refresh(Long id) throws Exception {
         esUtil.init(initType);
         Keyword keyword = keywordDao.get(id);
         businessPut(keyword);
+        return keyword;
     }
 
     /**
@@ -62,10 +64,11 @@ public class KeywordJob extends AbstractJob<Keyword> {
      * @param end
      * @throws Exception
      */
-    public void refresh(Long begin, Long end) throws Exception {
+    public Integer refresh(Long begin, Long end) throws Exception {
         esUtil.init(initType);
         List<Keyword> list = keywordDao.searchBySection(begin, end);
         run(list);
+        return list.size();
     }
 
     /**

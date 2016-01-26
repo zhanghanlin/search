@@ -40,12 +40,16 @@ public class KeywordController {
 
     @RequestMapping("refresh/all")
     @ResponseBody
-    public ResponseContent<Keyword> refreshAll() {
+    public ResponseContent<Integer> refreshAll() {
         try {
-            keywordData.refresh();
-            return new ResponseContent<Keyword>(ResponseEnum.OK);
+            Integer size = keywordData.refresh();
+            if (size.intValue() > 0) {
+                return new ResponseContent<Integer>(ResponseEnum.OK, size);
+            } else {
+                return new ResponseContent<Integer>(ResponseEnum.NOT_FOUND);
+            }
         } catch (Exception e) {
-            return new ResponseContent<Keyword>(ResponseEnum.EXCEPTION);
+            return new ResponseContent<Integer>(ResponseEnum.EXCEPTION);
         }
     }
 
@@ -53,8 +57,8 @@ public class KeywordController {
     @ResponseBody
     public ResponseContent<Keyword> refreshId(@PathVariable Long id) {
         try {
-            keywordData.refresh(id);
-            return new ResponseContent<Keyword>(ResponseEnum.OK);
+            Keyword keyword = keywordData.refresh(id);
+            return new ResponseContent<Keyword>(ResponseEnum.OK, keyword);
         } catch (Exception e) {
             return new ResponseContent<Keyword>(ResponseEnum.EXCEPTION);
         }
@@ -62,12 +66,16 @@ public class KeywordController {
 
     @RequestMapping("refresh/section/{begin}_{end}")
     @ResponseBody
-    public ResponseContent<Keyword> refreshSection(@PathVariable Long begin, @PathVariable Long end) {
+    public ResponseContent<Integer> refreshSection(@PathVariable Long begin, @PathVariable Long end) {
         try {
-            keywordData.refresh(begin, end);
-            return new ResponseContent<Keyword>(ResponseEnum.OK);
+            Integer size = keywordData.refresh(begin, end);
+            if (size.intValue() > 0) {
+                return new ResponseContent<Integer>(ResponseEnum.OK, size);
+            } else {
+                return new ResponseContent<Integer>(ResponseEnum.NOT_FOUND);
+            }
         } catch (Exception e) {
-            return new ResponseContent<Keyword>(ResponseEnum.EXCEPTION);
+            return new ResponseContent<Integer>(ResponseEnum.EXCEPTION);
         }
     }
 
