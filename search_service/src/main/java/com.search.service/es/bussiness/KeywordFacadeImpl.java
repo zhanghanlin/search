@@ -34,31 +34,43 @@ public class KeywordFacadeImpl extends AbstractFacade<Keyword> implements Keywor
 
     protected final static Logger LOG = LoggerFactory.getLogger(KeywordFacadeImpl.class);
 
-    @Resource
-    EsUtils esUtils;
-
     @Override
     public Keyword get(Long id) {
         Keyword keyword = null;
-        GetResponse gp = esUtils.getClient().prepareGet(Constants.GLOBAL_INDEX_NAME, BEAN_TYPE, id.toString())
+        GetResponse gp = this.esUtils.getClient().prepareGet(Constants.GLOBAL_INDEX_NAME, BEAN_TYPE, id.toString())
                 .execute().actionGet();
         if (gp.isExists()) {
             keyword = JSON.parseObject(gp.getSourceAsString(), Keyword.class);
         } else {
-            LOG.info("Not Exists : {}", id);
+            LOG.info("keyword is not found ,id : {}", id);
         }
         return keyword;
     }
 
+    /**
+     * 联想搜素
+     *
+     * @param key 搜索Key
+     * @return List<Keyword>
+     */
     public List<Keyword> associateWord(String key) {
-        return search(key, "", SortOrder.ASC, 1, 10).getItems();
+        return search(key, null, SortOrder.ASC, 1, 10).getItems();
     }
 
+    /**
+     * 搜素,关键字高亮
+     * @param key 关键字
+     * @param sort 排序
+     * @param order 排序方式
+     * @param pageNo 页码
+     * @param pageSize 每页数据量
+     * @return SearchResult<Keyword>
+     */
     public SearchResult<Keyword> search(String key, String sort, SortOrder order, int pageNo, int pageSize) {
         final SearchResult<Keyword> searchResult = new SearchResult<Keyword>();
         SearchRequestBuilder srb = builder(key, sort, order, pageNo, pageSize);
         SearchResponse searchResponse = srb.execute().actionGet();
-        esUtils.getClient().close();
+        this.esUtils.getClient().close();
         final SearchHits hits = searchResponse.getHits();
         List<Keyword> items = new ArrayList<Keyword>();
         for (final SearchHit searchHit : hits.getHits()) {
@@ -71,13 +83,13 @@ public class KeywordFacadeImpl extends AbstractFacade<Keyword> implements Keywor
             if (keywordField != null) {
                 // 取得定义的高亮标签
                 Text[] keywordFieldTexts = keywordField.fragments();
-                String word = "";
+                StringBuffer word = new StringBuffer();
                 // 为name串值增加自定义的高亮标签
                 for (Text text : keywordFieldTexts) {
-                    word += text;
+                    word.append(text);
                 }
                 // 将追加了高亮标签的串值重新填充到对应的对象
-                keyword.setWord(word);
+                keyword.setWord(word.toString());
             }
             items.add(keyword);
         }
@@ -103,7 +115,7 @@ public class KeywordFacadeImpl extends AbstractFacade<Keyword> implements Keywor
         MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(key,
                 highlightedFields).operator(MatchQueryBuilder.Operator.AND);
         bool.must(builder);
-        SearchRequestBuilder srb = esUtils.getBuilder().setTypes(BEAN_TYPE);
+        SearchRequestBuilder srb = this.esUtils.getBuilder().setTypes(BEAN_TYPE);
         // 设置查询类型
         // 1.SearchType.DFS_QUERY_THEN_FETCH = 精确查询
         // 2.SearchType.SCAN = 扫描查询,无序

@@ -13,25 +13,20 @@ import java.util.List;
 @Service
 public class KeywordJob extends AbstractJob<Keyword> {
 
-
     @Resource
     KeywordDao keywordDao;
-
-    @Resource
-    EsUtils esUtils;
 
     private final static String initType = "keyword";
 
     @Override
     protected void businessPut(Keyword keyword) throws Exception {
-        put(keyword.getId(), keyword);
+        this.put(keyword.getId(), keyword);
     }
 
     /**
      * 刷新所有商品
      */
     public Integer refresh() throws Exception {
-        esUtils.init(initType);
         List<Keyword> list = keywordDao.searchAll();
         run(list);
         return list.size();
@@ -43,7 +38,7 @@ public class KeywordJob extends AbstractJob<Keyword> {
      * @param id
      */
     public Keyword refresh(Long id) throws Exception {
-        esUtils.init(initType);
+        this.esUtils.init(initType);
         Keyword keyword = keywordDao.get(id);
         businessPut(keyword);
         return keyword;
@@ -57,7 +52,6 @@ public class KeywordJob extends AbstractJob<Keyword> {
      * @throws Exception
      */
     public Integer refresh(Long begin, Long end) throws Exception {
-        esUtils.init(initType);
         List<Keyword> list = keywordDao.searchBySection(begin, end);
         run(list);
         return list.size();

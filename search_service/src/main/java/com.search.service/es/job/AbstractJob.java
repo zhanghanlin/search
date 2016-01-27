@@ -1,12 +1,14 @@
 package com.search.service.es.job;
 
 import com.alibaba.fastjson.JSON;
+import com.search.service.es.utils.EsUtils;
 import com.search.service.es.utils.Jerseys;
 import com.search.utils.Constants;
 import com.sun.jersey.api.client.WebResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -18,6 +20,9 @@ import java.util.concurrent.locks.ReentrantLock;
 public abstract class AbstractJob<T> {
 
     protected static final Logger LOG = LoggerFactory.getLogger(AbstractJob.class);
+
+    @Resource
+    EsUtils esUtils;
 
     /**
      * Elsticsearch Client
@@ -71,6 +76,7 @@ public abstract class AbstractJob<T> {
     protected void run(List<T> list) throws Exception{
         LOG.info("[Job Flush] begin fresh run..............");
         LOG.info("[Job Flush] list size : {}", list.size());
+        esUtils.init(beanType());
         // 创建计数器
         final CountDownLatch allLatch = new CountDownLatch(list.size());
         try {
@@ -109,7 +115,7 @@ public abstract class AbstractJob<T> {
         } finally {
             // 释放锁
             lock.unlock();
-            LOG.info("[Job Flush] un lock");
+            LOG.info("[Job Flush] unlock");
         }
         LOG.info("[Job Flush] end fresh run..............");
     }

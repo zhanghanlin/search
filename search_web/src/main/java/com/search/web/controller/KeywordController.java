@@ -27,6 +27,10 @@ public class KeywordController {
     @Resource
     KeywordJob keywordData;
 
+    /**
+     * 测试写入/刷新索引
+     * @return
+     */
     @RequestMapping("refresh/test")
     @ResponseBody
     public ResponseContent<Keyword> refreshTest() {
@@ -38,6 +42,10 @@ public class KeywordController {
         }
     }
 
+    /**
+     * 写入/刷新全部索引
+     * @return
+     */
     @RequestMapping("refresh/all")
     @ResponseBody
     public ResponseContent<Integer> refreshAll() {
@@ -53,6 +61,11 @@ public class KeywordController {
         }
     }
 
+    /**
+     * 根据指定ID写入/刷新对象
+     * @param id
+     * @return
+     */
     @RequestMapping("refresh/{id}")
     @ResponseBody
     public ResponseContent<Keyword> refreshId(@PathVariable Long id) {
@@ -64,6 +77,12 @@ public class KeywordController {
         }
     }
 
+    /**
+     * 根据ID区间段写入/刷新索引
+     * @param begin
+     * @param end
+     * @return
+     */
     @RequestMapping("refresh/section/{begin}_{end}")
     @ResponseBody
     public ResponseContent<Integer> refreshSection(@PathVariable Long begin, @PathVariable Long end) {

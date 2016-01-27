@@ -12,6 +12,10 @@ public class SearchResult<T> {
 
     private List<T> items;
 
+    /**
+     * 总个数
+     * @return
+     */
     public int getTotalHits() {
         return totalHits;
     }
@@ -20,6 +24,10 @@ public class SearchResult<T> {
         this.totalHits = totalHits;
     }
 
+    /**
+     * 结果集
+     * @return
+     */
     public List<T> getItems() {
         return items;
     }

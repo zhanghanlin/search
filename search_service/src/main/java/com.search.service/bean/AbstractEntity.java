@@ -6,15 +6,42 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Bean父类
+ * 声明Bean对象的公共属性
+ */
 public abstract class AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = -5820053530587824428L;
 
+    /**
+     * ID
+     */
     private Long id;
+
+    /**
+     * 创建时间
+     */
     private Date createdAt;
+
+    /**
+     * 创建人
+     */
     private String createdBy;
+
+    /**
+     * 修改时间
+     */
     private Date changedAt;
+
+    /**
+     * 修改人
+     */
     private String changedBy;
+
+    /**
+     * 乐观锁
+     */
     private int version;
 
     public Long getId() {
