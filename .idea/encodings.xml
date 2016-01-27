@@ -1,33 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+  <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/search_cache" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/search_service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/search_service/src/main/java/com.search.service/bean/AbstractEntity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/search_test" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/search_test/src/test/resources/conf/application.properties" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_test/src/test/resources/logback.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_test/src/test/resources/spring/applicationContext-common.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_test/src/test/resources/spring/applicationContext-dataSource.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_test/src/test/resources/spring/applicationContext-elasticsearch.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_test/src/test/resources/spring/applicationContext-profile.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_test/src/test/resources/spring/applicationContext-redis.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_test/src/test/resources/spring/applicationContext.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_test/src/test/resources/spring/spring-mvc-servlet.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/search_utils" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/search_web" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/java/com/search/web/filter/XSSRequestWrapper.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/resources/conf/application.properties" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/resources/logback.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/resources/spring/applicationContext-common.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/resources/spring/applicationContext-dataSource.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/resources/spring/applicationContext-elasticsearch.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/resources/spring/applicationContext-profile.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/resources/spring/applicationContext-redis.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/resources/spring/applicationContext.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/resources/spring/spring-mvc-servlet.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/search_web/src/main/webapp/WEB-INF/web.xml" charset="GBK" />
-    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

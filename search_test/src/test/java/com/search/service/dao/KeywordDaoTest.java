@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 public class KeywordDaoTest extends AbstractTest {
 
@@ -42,5 +43,9 @@ public class KeywordDaoTest extends AbstractTest {
      */
     @Test
     public void testSearchBySection() throws Exception {
+        Long begin = 100000L;
+        Long end = 100003L;
+        List<Keyword> list = keywordDao.searchBySection(begin, end);
+        LOG.info("Begin : {},End : {},Size : {}", begin, end, list.size());
     }
 } 

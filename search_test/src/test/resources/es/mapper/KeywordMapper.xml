@@ -17,10 +17,10 @@
         from s_keyword
         where id = #{id}
     </select>
-    <select id="searchBySection" resultType="Keyword">
+    <select id="searchBySection" resultType="Keyword" parameterType="java.util.Map">
         select
         <include refid="Base_Column_List"/>
         from s_keyword
-        where id between #{0} and #{1}
+        where id between #{begin} and #{end}
     </select>
 </mapper>

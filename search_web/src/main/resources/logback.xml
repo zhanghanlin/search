@@ -13,7 +13,7 @@
 	<logger name="org.springframework">
 		<level value="WARN" />
 	</logger>
-	<logger name="oejh.HttpGenerator">
+	<logger name="org.elasticsearch">
 		<level value="WARN" />
 	</logger>
 	<logger name="com.alibaba.druid">
