@@ -18,6 +18,6 @@
 		<property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
 		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
 	</bean>
-	<bean id="jedisUtils" class="com.search.cache.redis.JedisUtil"
+	<bean id="jedisUtils" class="com.search.cache.redis.JedisUtils"
 		c:jedisPoolConfig-ref="jedisPoolConfig" c:host="${redis.host}" c:port="${redis.port}" />
 </beans>

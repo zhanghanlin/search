@@ -4,9 +4,9 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-public class JedisUtil extends JedisSupport {
+public class JedisUtils extends JedisSupport {
 
-    public JedisUtil(JedisPoolConfig jedisPoolConfig, String host, int port) {
+    public JedisUtils(JedisPoolConfig jedisPoolConfig, String host, int port) {
         this.host = host;
         this.port = port;
         this.jedisPoolConfig = jedisPoolConfig;
