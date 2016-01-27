@@ -45,11 +45,19 @@
         <processorPath useClasspath="true" />
         <module name="search_cache" />
       </profile>
+      <profile default="false" name="Annotation profile for search_test" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="search_test" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="search" target="1.7" />
       <module name="search_cache" target="1.7" />
       <module name="search_service" target="1.7" />
+      <module name="search_test" target="1.7" />
       <module name="search_utils" target="1.7" />
       <module name="search_web" target="1.7" />
     </bytecodeTargetLevel>

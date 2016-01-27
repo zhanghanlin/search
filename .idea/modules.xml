@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/search.iml" filepath="$PROJECT_DIR$/search.iml" />
       <module fileurl="file://$PROJECT_DIR$/search_cache/search_cache.iml" filepath="$PROJECT_DIR$/search_cache/search_cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/search_service/search_service.iml" filepath="$PROJECT_DIR$/search_service/search_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/search_test/search_test.iml" filepath="$PROJECT_DIR$/search_test/search_test.iml" />
       <module fileurl="file://$PROJECT_DIR$/search_utils/search_utils.iml" filepath="$PROJECT_DIR$/search_utils/search_utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/search_web/search_web.iml" filepath="$PROJECT_DIR$/search_web/search_web.iml" />
     </modules>

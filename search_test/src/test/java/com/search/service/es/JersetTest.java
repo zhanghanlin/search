@@ -1,4 +1,4 @@
-package com.search.service;
+package com.search.service.es;
 
 import com.alibaba.fastjson.JSON;
 import com.search.service.bean.Keyword;
@@ -29,9 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Administrator on 2016/1/25.
- */
 public class JersetTest {
     /**
      * settings
