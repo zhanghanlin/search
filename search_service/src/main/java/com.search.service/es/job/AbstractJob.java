@@ -1,7 +1,7 @@
 package com.search.service.es.job;
 
 import com.alibaba.fastjson.JSON;
-import com.search.service.es.util.Jerseys;
+import com.search.service.es.utils.Jerseys;
 import com.search.utils.Constants;
 import com.sun.jersey.api.client.WebResource;
 import org.slf4j.Logger;

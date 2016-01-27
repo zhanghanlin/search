@@ -1,4 +1,4 @@
-package com.search.service.es.util;
+package com.search.service.es.utils;
 
 import com.search.service.es.ElasticsearchNodeFactoryBean;
 import com.search.utils.Constants;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service
-public class EsUtil {
+public class EsUtils {
 
     @Autowired
     private ElasticsearchNodeFactoryBean esNode;
