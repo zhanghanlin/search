@@ -65,7 +65,6 @@
         <servlet-name>SpringMVC</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
     <jsp-config>
         <jsp-property-group>
             <description>html encoding example</description>
@@ -74,11 +73,11 @@
             <el-ignored>true</el-ignored>
             <page-encoding>UTF-8</page-encoding>
             <scripting-invalid>false</scripting-invalid>
-            <include-prelude></include-prelude>
-            <include-coda></include-coda>
+            <!--<include-prelude></include-prelude>-->
+            <!--<include-coda></include-coda>-->
         </jsp-property-group>
     </jsp-config>
     <welcome-file-list>
-        <welcome-file>/</welcome-file>
+        <welcome-file>/index.html</welcome-file>
     </welcome-file-list>
 </web-app>
