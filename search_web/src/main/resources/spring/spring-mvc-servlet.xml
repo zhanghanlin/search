@@ -12,14 +12,12 @@
     <description>SpringMVC Servlet</description>
     <!-- 自动扫描的包名 -->
     <context:component-scan base-package="com.search.**.*.controller">
-        <context:include-filter type="annotation"
-                                expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
-    <aop:config proxy-target-class="true"></aop:config>
+    <aop:config proxy-target-class="true"/>
     <mvc:view-controller path="/" view-name="/"/>
-
     <!-- 默认的注解映射的支持 -->
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -34,8 +32,7 @@
                     </list>
                 </property>
             </bean>
-            <bean
-                    class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
                         <!-- 避免IE出现下载JSON文件的情况 -->
@@ -48,10 +45,8 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-
     <!-- 视图解释类 -->
-    <bean
-            class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="mediaTypes">
             <map>
                 <entry key="json" value="application/json"/>
@@ -64,9 +59,7 @@
         </property>
     </bean>
 
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-            p:order="1">
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="1">
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.JstlView"/>
         <property name="contentType" value="text/html"/>
@@ -75,5 +68,5 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <mvc:resources mapping="/js/**" location="/js/" />
+    <mvc:resources mapping="/js/**" location="/js/"/>
 </beans>
